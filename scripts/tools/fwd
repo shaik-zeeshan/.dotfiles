@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+current_dir=$(pwd)
+
+present_dir=$(find . -type d -maxdepth 1 -mindepth 1)
+remove_dot=$(echo "$present_dir" | sed 's/^\.\///g')
+
+
+selected_dir=$(echo "$remove_dot" | fzf --preview 'tree -C {} -I "node_modules|dist"' --preview-window=right:50%:wrap )
+
+
+#if [ -z "$selected_dir" ]; then
+#    exit 0
+#fi
+#
+#selected_name=$(basename "$selected_dir" | tr . _)
+#
+## check if there is a tmux session with the same name
+#if [ -n "$selected_dir" ]; then
+#    tmux has-session -t $selected_name 2>/dev/null
+#    if [ $? -eq 0 ]; then
+#        if [ -z "$TMUX" ]; then
+#            tmux attach-session -t "$selected_name"
+#        else
+#            tmux switch -t "$selected_name"
+#        fi
+#        exit 0
+#    else
+#        tmux new-session -ds "$selected_name" -c "$selected_dir"
+#    fi
+#fi
+#
+#if [ -z "$TMUX" ]; then
+#    tmux attach-session -t "$selected_name"
+#else
+#    tmux switch -t "$selected_name"
+#fi

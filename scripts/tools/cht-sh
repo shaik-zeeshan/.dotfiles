@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+languages=$(echo "golang c cpp typescript rust javascript python bash" | tr " " "\n")
+core_utils=$(echo "git tmux vim eza find bat" | tr " " "\n")
+
+selected=$(echo -e "$languages\n$core_utils" | fzf)
+
+if [ -z "$selected" ]; then
+    exit 0
+fi
+
+read -p "What do you want to know about $selected? " query
+
+if [ -z "$query" ]; then
+    exit 0
+fi
+
+if [[ -z "$TMUX" ]]; then
+    curl -s cht.sh/$selected/$query | less
+    exit 0
+fi
+
+if echo "$languages" | grep -q "$selected"; then
+    tmux split-window -v bash -c "curl -s cht.sh/$selected/$(echo $query|tr " " "+") | less"
+else
+    tmux split-window -v bash -c "curl -s cht.sh/$selected~$(echo $query|tr " " "+") | less"
+fi

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+ROOT_PROJECT_DIR="/Volumes/zeeshan/Developer"
+
+project_folders=(
+"$(find $ROOT_PROJECT_DIR/Javascript -maxdepth 1 -type d)"
+"$(find $ROOT_PROJECT_DIR/Python -maxdepth 1 -type d)"
+)
+
+selected_project=$(printf '%s\n' "${project_folders[@]}" | fzf)
+
+if [ -z "$selected_project" ]; then
+    echo "No project selected"
+    exit 1
+fi
+
+echo "Opening $selected_project"

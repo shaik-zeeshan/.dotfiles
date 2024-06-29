@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+# get options from the user
+TEMP=$(getopt -n "$0" -a -l "t" -- -- "$@")
+
+[ $? -eq 0 ] || exit
+
+eval set --  "$TEMP"
+
+while [ $# -gt 0 ]
+do
+         case "$1" in
+                --t) opts_tmux=true; shift;;
+                --) shift;;
+         esac
+         shift;
+done
+
+# if the user wants to see only tmux sessions then show only tmux sessions
+if [ "$opts_tmux" = true ]; then
+    LIST=$(tmux ls | cut -d ":" -f 1)
+    selected_session=$(echo "$LIST" | ~/tools/fzf-tmux.sh --preview="tmux capture-pane -ep -t {}")
+    if [ -n "$selected_session" ]; then
+        if [ -z "$TMUX" ]; then
+            tmux attach-session -t $selected_session
+        else
+            tmux switch -t $selected_session
+        fi
+    fi
+    exit 0
+fi
+
+
+# if the user wants to see all the project directories and then select one then show all the project directories
+# get the list of all the project directories
+ROOT_PROJECT_DIR="/Volumes/zeeshan/Developer"
+
+projectdirs=(
+"$(find ~/ -maxdepth 1 -type d)"
+"$(find $ROOT_PROJECT_DIR -maxdepth 2 -type d)"
+"$(find $ROOT_PROJECT_DIR/Javascript -maxdepth 2 -type d)"
+)
+
+selected_dir=$(printf '%s\n' "${projectdirs[@]}"| fzf)
+
+if [ -z "$selected_dir" ]; then
+    exit 0
+fi
+
+selected_name=$(basename "$selected_dir" | tr . _)
+
+# check if there is a tmux session with the same name
+if [ -n "$selected_dir" ]; then
+    tmux has-session -t $selected_name 2>/dev/null
+    if [ $? -eq 0 ]; then
+        if [ -z "$TMUX" ]; then
+            tmux attach-session -t "$selected_name"
+        else
+            tmux switch -t "$selected_name"
+        fi
+        exit 0
+    else
+        tmux new-session -ds "$selected_name" -c "$selected_dir"
+    fi
+fi
+
+if [ -z "$TMUX" ]; then
+    tmux attach-session -t "$selected_name"
+else
+    tmux switch -t "$selected_name"
+fi
