@@ -17,7 +17,7 @@ WORKDIR /app
 
 # Update and install common packages
 RUN apt-get update && \
-    apt-get install -y software-properties-common curl git build-essential && \
+    apt-get install -y software-properties-common curl git build-essential neovim && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

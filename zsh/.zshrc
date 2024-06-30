@@ -202,7 +202,6 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
-source ~/fzf-git.sh/fzf-git.sh
 
 # --- setup bat theme ---
 export BAT_THEME="gruvbox-dark"
