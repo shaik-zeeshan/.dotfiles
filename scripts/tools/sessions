@@ -19,7 +19,7 @@ done
 # if the user wants to see only tmux sessions then show only tmux sessions
 if [ "$opts_tmux" = true ]; then
     LIST=$(tmux ls | cut -d ":" -f 1)
-    selected_session=$(echo "$LIST" | ~/tools/fzf-tmux.sh --preview="tmux capture-pane -ep -t {}")
+    selected_session=$(echo "$LIST" | ~/tools/fzf-tmux.sh --preview="tmux capture-pane -ep -t {}" --bind="ctrl-k:kill-line+execute-silent(tmux kill-session -t {})")
     if [ -n "$selected_session" ]; then
         if [ -z "$TMUX" ]; then
             tmux attach-session -t $selected_session
@@ -36,7 +36,7 @@ fi
 ROOT_PROJECT_DIR="/Volumes/zeeshan/Developer"
 
 projectdirs=(
-"$(find ~/ -maxdepth 1 -type d)"
+"$(find -L ~/ -maxdepth 1 -type d)"
 "$(find $ROOT_PROJECT_DIR -maxdepth 2 -type d)"
 "$(find $ROOT_PROJECT_DIR/Javascript -maxdepth 2 -type d)"
 )
