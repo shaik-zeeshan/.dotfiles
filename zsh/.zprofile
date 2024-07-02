@@ -9,3 +9,6 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Added by Toolbox App
 export PATH="$PATH:/Users/shaikzeeshan/Library/Application Support/JetBrains/Toolbox/scripts"
 export PATH="$PATH:/Users/shaikzeeshan/.cargo/bin"
+
+# --- Ollama ---
+export OLLAMA_MODELS="/Volumes/zeeshan/ollama/models"

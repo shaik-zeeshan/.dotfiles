@@ -72,7 +72,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -136,6 +136,9 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 # Tools
 export PATH="$HOME/tools:$PATH"
 
+# Go Binaries
+export PATH=${PATH}:`go env GOPATH`/bin
+
 # Key bindings
 bindkey -s '^f' "sessions\n"
 bindkey -s '^x' "sessions --t\n"
@@ -156,6 +159,7 @@ alias tnew='tmux new -s $(basename $PWD)'
 alias external="cd /Volumes/zeeshan"
 
 alias air='$(go env GOPATH)/bin/air'
+
 
 # ---- FZF -----
 
@@ -233,3 +237,7 @@ source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export POWERLEVEL9K_DIR_MAX_LENGTH=1
 export POWERLEVEL9K_SHORTEN_STRATEGY="truncate_to_last"
+
+# Ollama
+alias ollama="OLLAMA_MODELS=/Volumes/zeeshan/ollama/models ollama"
+
