@@ -139,6 +139,8 @@ export PATH="$HOME/tools:$PATH"
 # Go Binaries
 export PATH=${PATH}:`go env GOPATH`/bin
 
+
+
 # Key bindings
 bindkey -s '^f' "sessions\n"
 bindkey -s '^x' "sessions --t\n"
