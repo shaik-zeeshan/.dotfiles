@@ -101,6 +101,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -171,28 +172,35 @@ eval "$(fzf --zsh)"
 # --- setup fzf theme ---
 _gen_fzf_default_opts() {
 
-local color00='#32302f'
-local color01='#3c3836'
-local color02='#504945'
-local color03='#665c54'
-local color04='#bdae93'
-local color05='#d5c4a1'
-local color06='#ebdbb2'
-local color07='#fbf1c7'
-local color08='#fb4934'
-local color09='#fe8019'
-local color0A='#fabd2f'
-local color0B='#b8bb26'
-local color0C='#8ec07c'
-local color0D='#83a598'
-local color0E='#d3869b'
-local color0F='#d65d0e'
-
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS"\
-" --color=bg+:$color01,bg:-1,spinner:$color0C,hl:$color0D"\
-" --color=fg:$color04,header:$color0D,info:$color0A,pointer:$color0C"\
-" --color=marker:$color0C,fg+:$color06,prompt:$color0A,hl+:$color0D"
-
+#local color00='#32302f'
+#local color01='#3c3836'
+#local color02='#504945'
+#local color03='#665c54'
+#local color04='#bdae93'
+#local color05='#d5c4a1'
+#local color06='#ebdbb2'
+#local color07='#fbf1c7'
+#local color08='#fb4934'
+#local color09='#fe8019'
+#local color0A='#fabd2f'
+#local color0B='#b8bb26'
+#local color0C='#8ec07c'
+#local color0D='#83a598'
+#local color0E='#d3869b'
+#local color0F='#d65d0e'
+#
+#export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS"\
+#" --color=bg+:$color01,bg:-1,spinner:$color0C,hl:$color0D"\
+#" --color=fg:$color04,header:$color0D,info:$color0A,pointer:$color0C"\
+#" --color=marker:$color0C,fg+:$color06,prompt:$color0A,hl+:$color0D"
+#
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+  --color=fg:-1,fg+:#d0d0d0,bg:-1,bg+:#262626
+  --color=hl:#5f87af,hl+:#5fd7ff,info:#afaf87,marker:#87ff00
+  --color=prompt:#005dd6,spinner:#8fff5e,pointer:#5efff4,header:#87afaf
+  --color=border:#262626,label:#aeaeae,query:#d9d9d9
+  --border="rounded" --border-label="" --preview-window="border-rounded" --prompt="> "
+  --marker=">" --pointer="◆" --separator="─" --scrollbar="│"'
 }
 
 _gen_fzf_default_opts
@@ -220,6 +228,7 @@ _fzf_compgen_dir() {
 export BAT_THEME="gruvbox-dark"
 alias bat-preview="bat --style=header,grid,numbers --color always"
 alias cat="bat"
+alias p="pnpm"
 
 
 alias less="bat -p --color=always"
@@ -242,4 +251,3 @@ export POWERLEVEL9K_SHORTEN_STRATEGY="truncate_to_last"
 
 # Ollama
 alias ollama="OLLAMA_MODELS=/Volumes/zeeshan/ollama/models ollama"
-

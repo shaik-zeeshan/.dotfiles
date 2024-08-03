@@ -24,6 +24,12 @@ return {
 				null_ls.builtins.formatting.prettierd.with({
 					method = null_ls.methods.FORMATTING,
 				}),
+				null_ls.builtins.formatting.shfmt.with({
+					method = null_ls.methods.FORMATTING,
+				}),
+				null_ls.builtins.formatting.gofmt.with({
+					method = null_ls.methods.FORMATTING,
+				}),
 				require("none-ls.diagnostics.eslint_d").with({
 					method = null_ls.methods.DIAGNOSTICS,
 					condition = function(utils)

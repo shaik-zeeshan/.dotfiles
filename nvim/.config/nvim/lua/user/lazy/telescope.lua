@@ -29,7 +29,7 @@ return {
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>pf", function()
 				builtin.find_files({
-					find_command = { "fd", "--type", "f", "--hidden", "--follow", "--exclude", ".git" },
+					find_command = { "fd", "--type", "f", "--hidden", "--follow" },
 				})
 			end, {})
 			vim.keymap.set("n", "<C-p>", builtin.git_files, {})

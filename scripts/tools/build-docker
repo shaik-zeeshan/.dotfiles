@@ -13,7 +13,6 @@ check_docker() {
 create_dockerfile() {
     cat << EOF > Dockerfile
 FROM ubuntu:latest
-WORKDIR /app
 
 # Update and install common packages
 RUN apt-get update && \
@@ -28,6 +27,18 @@ RUN add-apt-repository --yes --update ppa:ansible/ansible && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update && apt-get install -y sudo
+
+RUN useradd -m -s /bin/bash zeeshan && \
+    echo "zeeshan:zeeshan" | chpasswd && \
+    usermod -aG sudo zeeshan
+
+RUN echo "myuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+USER zeeshan
+
+WORKDIR /home/zeeshan
+WORKDIR /home/zeeshan/app
 # Copy the application files
 COPY . .
 

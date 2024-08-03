@@ -22,5 +22,12 @@ return {
 				},
 			},
 		})
+
+		vim.api.nvim_set_keymap(
+			"n",
+			"<leader>cc",
+			"<cmd>lua require('cloak').toggle()<CR>",
+			{ noremap = true, silent = true }
+		)
 	end,
 }
