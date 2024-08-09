@@ -69,3 +69,4 @@ if [ -z "$TMUX" ]; then
 else
     tmux switch -t "$selected_name"
 fi
+

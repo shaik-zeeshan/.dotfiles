@@ -26,11 +26,73 @@ return {
 				},
 			})
 
+			local pickers = require("telescope.pickers")
+			local finders = require("telescope.finders")
+			local conf = require("telescope.config").values
+			local actions = require("telescope.actions")
+			local action_state = require("telescope.actions.state")
+
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>pf", function()
-				builtin.find_files({
-					find_command = { "fd", "--type", "f", "--hidden", "--follow" },
-				})
+				-- if file turbo.json exists then open it
+				if vim.fn.filereadable("turbo.json") == 1 then
+					-- check the apps and packages folder
+					local apps = vim.fn.glob("apps/*", true, true)
+					local packages = vim.fn.glob("packages/*", true, true)
+					local folders = { "global" }
+
+					for _, app in ipairs(apps) do
+						table.insert(folders, app)
+					end
+
+					for _, package in ipairs(packages) do
+						table.insert(folders, package)
+					end
+
+					local package_selector = function(opts)
+						opts = opts or {}
+						pickers
+							.new(opts, {
+								prompt_title = "Select Package",
+								finder = finders.new_table({
+									results = folders,
+								}),
+								sorter = conf.generic_sorter(opts),
+								attach_mappings = function(prompt_bufnr)
+									actions.select_default:replace(function()
+										local selection = action_state.get_selected_entry()
+										actions.close(prompt_bufnr)
+										if selection.value == "global" then
+											builtin.find_files({
+												find_command = { "fd", "--type", "f", "--hidden", "--follow" },
+											})
+										else
+											builtin.find_files({
+												find_command = {
+													"fd",
+													".",
+													selection[1],
+													"--type",
+													"f",
+													"--hidden",
+													"--follow",
+												},
+											})
+										end
+									end)
+
+									return true
+								end,
+							})
+							:find()
+					end
+
+					package_selector()
+				else
+					builtin.find_files({
+						find_command = { "fd", "--type", "f", "--hidden", "--follow" },
+					})
+				end
 			end, {})
 			vim.keymap.set("n", "<C-p>", builtin.git_files, {})
 			vim.keymap.set("n", "<leader>pws", function()

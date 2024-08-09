@@ -11,7 +11,7 @@ config.window_padding = {
 	bottom = 10,
 }
 
-config.color_scheme = "Kanagawa (Gogh)"
+config.color_scheme = "Chalk (dark) (terminal.sexy)"
 local act = wezterm.action
 
 config.keys = {

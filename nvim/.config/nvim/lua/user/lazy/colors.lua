@@ -54,45 +54,56 @@ return {
 	--			ColorMyPencils()
 	--		end,
 	--	},
-	--{
-	--	"sainnhe/gruvbox-material",
-	--	lazy = false,
-	--	priority = 1000,
-	--	config = function()
-	--		vim.cmd("colorscheme gruvbox-material")
-	--		ColorMyPencils("gruvbox-material")
-	--		vim.g.gruvbox_material_foreground = "mix"
-	--		vim.g.gruvbox_material_disable_terminal_colors = 1
-	--		vim.g.gruvbox_material_transparent_background = 2
-	--	end,
-	--},
 	{
-		"rebelot/kanagawa.nvim",
-		name = "kanagawa",
+		"sainnhe/gruvbox-material",
+		lazy = false,
+		priority = 1000,
 		config = function()
-			require("kanagawa").setup({
-				theme = "dragon",
-				force_reverse_video_cursor = true,
-				colors = {
-					foreground = "#dcd7ba",
-					background = "#1f1f28",
-
-					cursor_bg = "#c8c093",
-					cursor_fg = "#c8c093",
-					cursor_border = "#c8c093",
-
-					selection_fg = "#c8c093",
-					selection_bg = "#2d4f67",
-
-					scrollbar_thumb = "#16161d",
-					split = "#16161d",
-
-					ansi = { "#090618", "#c34043", "#76946a", "#c0a36e", "#7e9cd8", "#957fb8", "#6a9589", "#c8c093" },
-					brights = { "#727169", "#e82424", "#98bb6c", "#e6c384", "#7fb4ca", "#938aa9", "#7aa89f", "#dcd7ba" },
-					indexed = { [16] = "#ffa066", [17] = "#ff5d62" },
-				},
-			})
-			ColorMyPencils("kanagawa")
+			vim.cmd("colorscheme gruvbox-material")
+			vim.g.gruvbox_material_transparent_background = "2"
+			ColorMyPencils("gruvbox-material")
 		end,
 	},
+	--	{
+	--		"rebelot/kanagawa.nvim",
+	--		name = "kanagawa",
+	--		config = function()
+	--			require("kanagawa").setup({
+	--				theme = "dragon",
+	--				force_reverse_video_cursor = true,
+	--				colors = {
+	--					foreground = "#dcd7ba",
+	--					background = "#1f1f28",
+	--
+	--					cursor_bg = "#c8c093",
+	--					cursor_fg = "#c8c093",
+	--					cursor_border = "#c8c093",
+	--
+	--					selection_fg = "#c8c093",
+	--					selection_bg = "#2d4f67",
+	--
+	--					scrollbar_thumb = "#16161d",
+	--					split = "#16161d",
+	--
+	--					ansi = { "#090618", "#c34043", "#76946a", "#c0a36e", "#7e9cd8", "#957fb8", "#6a9589", "#c8c093" },
+	--					brights = { "#727169", "#e82424", "#98bb6c", "#e6c384", "#7fb4ca", "#938aa9", "#7aa89f", "#dcd7ba" },
+	--					indexed = { [16] = "#ffa066", [17] = "#ff5d62" },
+	--				},
+	--			})
+	--			ColorMyPencils("kanagawa")
+	--		end,
+	--	},
+	--	{
+	--		"catppuccin/nvim",
+	--		name = "catppuccin",
+	--		priority = 1000,
+	--		config = function()
+	--			require("catppuccin").setup({
+	--				flavour = "macchiato",
+	--				transparent_background = true,
+	--			})
+	--
+	--			ColorMyPencils("catppuccin")
+	--		end,
+	--	},
 }

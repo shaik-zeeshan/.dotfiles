@@ -1,0 +1,6 @@
+#! /usr/bin/env bash
+
+set -x
+
+session=$(tmuxifier list-windows | fzf-tmux -p)
+tmuxifier load-window $session

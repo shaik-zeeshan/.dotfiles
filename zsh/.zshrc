@@ -140,11 +140,15 @@ export PATH="$HOME/tools:$PATH"
 # Go Binaries
 export PATH=${PATH}:`go env GOPATH`/bin
 
+# Tmuxifier
+export PATH="$HOME/.tmuxifier/bin:$PATH"
+
 
 
 # Key bindings
 bindkey -s '^f' "sessions\n"
 bindkey -s '^x' "sessions --t\n"
+bindkey -s '^t' "tmux-layout\n"
 
 
 
@@ -193,11 +197,12 @@ _gen_fzf_default_opts() {
 #" --color=bg+:$color01,bg:-1,spinner:$color0C,hl:$color0D"\
 #" --color=fg:$color04,header:$color0D,info:$color0A,pointer:$color0C"\
 #" --color=marker:$color0C,fg+:$color06,prompt:$color0A,hl+:$color0D"
-#
+
+# Permanent Link for this theme: https://vitormv.github.io/fzf-themes#eyJib3JkZXJTdHlsZSI6InJvdW5kZWQiLCJib3JkZXJMYWJlbCI6IiIsImJvcmRlckxhYmVsUG9zaXRpb24iOjAsInByZXZpZXdCb3JkZXJTdHlsZSI6InJvdW5kZWQiLCJwYWRkaW5nIjoiMCIsIm1hcmdpbiI6IjAiLCJwcm9tcHQiOiI+ICIsIm1hcmtlciI6Ij4iLCJwb2ludGVyIjoi4peGIiwic2VwYXJhdG9yIjoi4pSAIiwic2Nyb2xsYmFyIjoi4pSCIiwibGF5b3V0IjoiZGVmYXVsdCIsImluZm8iOiJkZWZhdWx0IiwiY29sb3JzIjoiZmcrOiNENUQzQUMsYmcrOiMyNjI2MjYsaGw6IzQ1M0EyQyxobCs6IzQ1M0EyQyxpbmZvOiM3Qjg1NzMsbWFya2VyOiM2NTY3NTYscHJvbXB0OiM0NTNBMkMsc3Bpbm5lcjojNDUzQTJDLHBvaW50ZXI6IzQ1M0EyQyxoZWFkZXI6IzQ1M0EyQyxib3JkZXI6IzI2MjYyNixsYWJlbDojYWVhZWFlLHF1ZXJ5OiNkOWQ5ZDkifQ==
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-  --color=fg:-1,fg+:#d0d0d0,bg:-1,bg+:#262626
-  --color=hl:#5f87af,hl+:#5fd7ff,info:#afaf87,marker:#87ff00
-  --color=prompt:#005dd6,spinner:#8fff5e,pointer:#5efff4,header:#87afaf
+  --color=fg:-1,fg+:#D5D3AC,bg:-1,bg+:-1,gutter:-1
+  --color=hl:#453A2C,hl+:#cda26a,info:#7B8573,marker:#656756
+  --color=prompt:#453A2C,spinner:#453A2C,pointer:#453A2C,header:#453A2C
   --color=border:#262626,label:#aeaeae,query:#d9d9d9
   --border="rounded" --border-label="" --preview-window="border-rounded" --prompt="> "
   --marker=">" --pointer="◆" --separator="─" --scrollbar="│"'
@@ -240,7 +245,7 @@ alias lh='eza -dl .* --group-directories-first'
 alias ll='eza -al --group-directories-first'
 alias ls='eza -alF --color=always --sort=size | grep -v /'
 alias lm='eza -al --sort=modified'
-alias lt='eza -T'
+alias lt="eza -T -I '.git|venv|data/zip2d/*|node_modules'"
 
 source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -251,3 +256,9 @@ export POWERLEVEL9K_SHORTEN_STRATEGY="truncate_to_last"
 
 # Ollama
 alias ollama="OLLAMA_MODELS=/Volumes/zeeshan/ollama/models ollama"
+
+
+# Tmuxifier init
+export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux/layouts"
+eval "$(tmuxifier init -)"
+
