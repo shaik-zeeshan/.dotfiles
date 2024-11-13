@@ -167,6 +167,11 @@ alias external="cd /Volumes/zeeshan"
 
 alias air='$(go env GOPATH)/bin/air'
 
+function copy() {
+    command=$1
+
+    eval $command | pbcopy
+}
 
 # ---- FZF -----
 
@@ -260,5 +265,6 @@ alias ollama="OLLAMA_MODELS=/Volumes/zeeshan/ollama/models ollama"
 
 # Tmuxifier init
 export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux/layouts"
+export TMUXIFIER_NO_COMPLETE=1
 eval "$(tmuxifier init -)"
 
