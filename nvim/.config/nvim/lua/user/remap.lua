@@ -43,6 +43,7 @@ vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww sessions<CR>")
 vim.keymap.set("n", "<C-x>", "<cmd>silent !tmux neww sessions --t<CR>")
 vim.keymap.set("n", "<C-_>", "<cmd>silent !tmux neww cht-sh<CR>")
 vim.keymap.set("n", "<leader>lg", "<cmd>silent !tmux neww lazygit<CR>")
+vim.keymap.set("n", "<leader>fs", "<cmd>silent !tmux neww yazi<CR>")
 
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")

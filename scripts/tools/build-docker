@@ -2,16 +2,17 @@
 
 # Function to check if Docker is installed
 check_docker() {
-    if ! command -v docker &> /dev/null
-    then
-        echo "Docker is not installed. Please install Docker and try again."
-        exit 1
-    fi
+	if ! command -v docker &>/dev/null; then
+		echo "Docker is not installed. Please install Docker and try again."
+		exit 1
+	fi
 }
 
 # Function to create Dockerfile with optimized caching
 create_dockerfile() {
-    cat << EOF > Dockerfile
+	container_dir="$1"
+	echo $container_dir
+	cat <<EOF >Dockerfile
 FROM ubuntu:latest
 
 # Update and install common packages
@@ -38,7 +39,7 @@ RUN echo "myuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 USER zeeshan
 
 WORKDIR /home/zeeshan
-WORKDIR /home/zeeshan/app
+WORKDIR /home/zeeshan/$container_dir
 # Copy the application files
 COPY . .
 
@@ -48,30 +49,32 @@ EOF
 
 # Function to build Docker image with caching
 build_image() {
-    local image_name="$1"
-    docker build --build-arg CACHEBUST=$(date +%s) -t "$image_name" .
+	local image_name="$1"
+	docker build --build-arg CACHEBUST=$(date +%s) -t "$image_name" .
 }
 
 # Main script
 main() {
-    check_docker
+	check_docker
 
-    # Get the current directory name
-    dir_name=$(basename "$(pwd)")
-    image_name="container-${dir_name}"
+	work_dir="$1"
 
-    echo "Creating Dockerfile..."
-    create_dockerfile
+	# Get the current directory name
+	dir_name=$(basename "$(pwd)")
+	image_name="container-${dir_name}"
 
-    echo "Building Docker image: $image_name"
-    build_image "$image_name"
+	echo "Creating Dockerfile..."
+	create_dockerfile $work_dir
 
-    echo "Cleaning up..."
-    rm Dockerfile
+	echo "Building Docker image: $image_name"
+	build_image "$image_name"
 
-    echo "Docker image '$image_name' has been created successfully."
-    echo "To run the container, use: docker run -it $image_name"
+	echo "Cleaning up..."
+	rm Dockerfile
+
+	echo "Docker image '$image_name' has been created successfully."
+	echo "To run the container, use: docker run -it $image_name"
 }
 
 # Run the main function
-main
+main "$@"

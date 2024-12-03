@@ -12,7 +12,6 @@ return {
 		"saadparwaiz1/cmp_luasnip",
 		"j-hui/fidget.nvim",
 	},
-
 	config = function()
 		local cmp = require("cmp")
 		local cmp_lsp = require("cmp_nvim_lsp")
@@ -22,6 +21,9 @@ return {
 			vim.lsp.protocol.make_client_capabilities(),
 			cmp_lsp.default_capabilities()
 		)
+
+		local lspconfig = require("lspconfig")
+		local util = lspconfig.util
 
 		require("fidget").setup({})
 		require("mason").setup()
@@ -39,7 +41,6 @@ return {
 				end,
 
 				["rust_analyzer"] = function()
-					local lspconfig = require("lspconfig")
 					lspconfig.rust_analyzer.setup({
 						capabilities = capabilities,
 						settings = {
@@ -56,7 +57,6 @@ return {
 				end,
 
 				["lua_ls"] = function()
-					local lspconfig = require("lspconfig")
 					lspconfig.lua_ls.setup({
 						capabilities = capabilities,
 						settings = {
@@ -64,27 +64,47 @@ return {
 								diagnostics = {
 									globals = { "vim", "it", "describe", "before_each", "after_each" },
 								},
-							},
-						},
-					})
-				end,
-				["tailwindcss"] = function()
-					local lspconfig = require("lspconfig")
-					lspconfig.tailwindcss.setup({
-						capabilities = capabilities,
-						settings = {
-							tailwindCSS = {
-								experimental = {
-									classRegex = {
-										{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
-										{ "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
-									},
+								hint = {
+									enable = true,
+								},
+								workspace = {
+									library = vim.api.nvim_get_runtime_file("", true),
 								},
 							},
 						},
 					})
 				end,
 			},
+		})
+
+		lspconfig.tailwindcss.setup({
+			capabilities = capabilities,
+			settings = {
+				tailwindCSS = {
+					experimental = {
+						classRegex = {
+							{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+							{ "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+						},
+					},
+				},
+			},
+			root_dir = lspconfig.util.root_pattern(
+				"tailwind.config.js",
+				"tailwind.config.cjs",
+				"tailwind.config.ts",
+				"postcss.config.js",
+				"postcss.config.cjs",
+				"postcss.config.ts"
+			),
+		})
+		lspconfig.tsserver.setup({
+			capabilities = capabilities,
+			root_dir = lspconfig.util.root_pattern("package.json"),
+			single_file_support = false,
+		})
+		lspconfig.denols.setup({
+			root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
 		})
 
 		local cmp_select = { behavior = cmp.SelectBehavior.Select }

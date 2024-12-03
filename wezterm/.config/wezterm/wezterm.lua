@@ -50,7 +50,7 @@ config.set_environment_variables = {
 	TERM = "xterm-256color",
 }
 
-config.font = wezterm.font("GeistMono Nerd Font Mono", { weight = "DemiBold" })
+config.font = wezterm.font("GeistMono Nerd Font Mono", { weight = "Bold" })
 config.font_size = 12
 config.line_height = 1.30
 

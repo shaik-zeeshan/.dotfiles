@@ -1,4 +1,4 @@
-local local_plugins = {
+return {
 	{
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",
@@ -41,5 +41,3 @@ local local_plugins = {
 		end,
 	},
 }
-
-return local_plugins
