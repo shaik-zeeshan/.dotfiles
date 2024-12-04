@@ -90,6 +90,7 @@ return {
 					package_selector()
 				else
 					builtin.find_files({
+						previewer = false,
 						find_command = { "fd", "--type", "f", "--hidden", "--follow" },
 					})
 				end
