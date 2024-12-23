@@ -3,6 +3,8 @@ require("user.remap")
 
 require("user.lazy_init")
 
+require("user.floaterminal")
+
 -- DO.not
 -- DO NOT INCLUDE THIS
 

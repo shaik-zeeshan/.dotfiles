@@ -39,7 +39,9 @@ RUN echo "myuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 USER zeeshan
 
 WORKDIR /home/zeeshan
+RUN  mkdir -p $container_dir
 WORKDIR /home/zeeshan/$container_dir
+
 # Copy the application files
 COPY . .
 

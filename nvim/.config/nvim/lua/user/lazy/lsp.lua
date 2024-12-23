@@ -11,6 +11,7 @@ return {
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
 		"j-hui/fidget.nvim",
+		"jose-elias-alvarez/typescript.nvim",
 	},
 	config = function()
 		local cmp = require("cmp")
@@ -23,7 +24,6 @@ return {
 		)
 
 		local lspconfig = require("lspconfig")
-		local util = lspconfig.util
 
 		require("fidget").setup({})
 		require("mason").setup()
@@ -33,6 +33,7 @@ return {
 				"rust_analyzer",
 				"tsserver",
 			},
+			automatic_installation = true,
 			handlers = {
 				function(server_name) -- default handler (optional)
 					require("lspconfig")[server_name].setup({
@@ -67,9 +68,6 @@ return {
 								hint = {
 									enable = true,
 								},
-								workspace = {
-									library = vim.api.nvim_get_runtime_file("", true),
-								},
 							},
 						},
 					})
@@ -102,10 +100,52 @@ return {
 			capabilities = capabilities,
 			root_dir = lspconfig.util.root_pattern("package.json"),
 			single_file_support = false,
+			settings = {
+				typescript = {
+					inlayHints = {
+						includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
+						includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+						includeInlayVariableTypeHints = true,
+						includeInlayFunctionParameterTypeHints = true,
+						includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+						includeInlayPropertyDeclarationTypeHints = true,
+						includeInlayFunctionLikeReturnTypeHints = true,
+						includeInlayEnumMemberValueHints = true,
+					},
+				},
+				javascript = {
+					inlayHints = {
+						includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
+						includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+						includeInlayVariableTypeHints = true,
+
+						includeInlayFunctionParameterTypeHints = true,
+						includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+						includeInlayPropertyDeclarationTypeHints = true,
+						includeInlayFunctionLikeReturnTypeHints = true,
+						includeInlayEnumMemberValueHints = true,
+					},
+				},
+			},
+			inlayHints = {
+				enable = true,
+			},
 		})
 		lspconfig.denols.setup({
 			root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
 		})
+
+		--lspconfig.eslint.setup({
+		--	settings = {
+		--		packageManager = "yarn",
+		--	},
+		--	on_attach = function(client, bufnr)
+		--		vim.api.nvim_create_autocmd("BufWritePre", {
+		--			buffer = bufnr,
+		--			command = "EslintFixAll",
+		--		})
+		--	end,
+		--})
 
 		local cmp_select = { behavior = cmp.SelectBehavior.Select }
 

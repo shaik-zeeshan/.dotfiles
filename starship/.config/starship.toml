@@ -7,6 +7,7 @@ scan_timeout = 10
 # Disable the blank line at the start of the prompt
 add_newline = false
 
+
 # Replace the '❯' symbol in the prompt with '➜'
 [character] # The name of the module we are configuring is 'character'
 success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
@@ -33,7 +34,7 @@ symbol = " "
 [directory]
 read_only = " 󰌾"
 truncation_length = 1
-style = "yellow bold"
+style = "#D7A972"
 
 [docker_context]
 symbol = " "

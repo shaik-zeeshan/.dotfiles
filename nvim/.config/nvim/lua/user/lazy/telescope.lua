@@ -16,11 +16,15 @@ return {
 					prompt_prefix = "❯ ",
 					selection_caret = "❯ ",
 				},
+				pickers = {
+					theme = "ivy",
+					find_files = {
+						theme = "ivy",
+					},
+				},
 				extensions = {
 					fzf = {
 						fuzzy = true,
-						override_generic_sorter = true,
-						override_file_sorter = true,
 						case_mode = "smart_case",
 					},
 				},
@@ -31,10 +35,9 @@ return {
 			local conf = require("telescope.config").values
 			local actions = require("telescope.actions")
 			local action_state = require("telescope.actions.state")
-
 			local builtin = require("telescope.builtin")
-			vim.keymap.set("n", "<leader>pf", function()
-				-- if file turbo.json exists then open it
+
+			local monorepo_search = function()
 				if vim.fn.filereadable("turbo.json") == 1 then
 					-- check the apps and packages folder
 					local apps = vim.fn.glob("apps/*", true, true)
@@ -53,6 +56,7 @@ return {
 						opts = opts or {}
 						pickers
 							.new(opts, {
+								theme = "ivy",
 								prompt_title = "Select Package",
 								finder = finders.new_table({
 									results = folders,
@@ -90,11 +94,21 @@ return {
 					package_selector()
 				else
 					builtin.find_files({
-						previewer = false,
 						find_command = { "fd", "--type", "f", "--hidden", "--follow" },
 					})
 				end
+			end
+
+			vim.keymap.set("n", "<leader>pf", function()
+				builtin.find_files({
+					find_command = { "fd", "--type", "f", "--hidden", "--follow" },
+				})
 			end, {})
+			vim.keymap.set("n", "<leader>en", function()
+				builtin.find_files({
+					cwd = vim.fn.stdpath("config"),
+				})
+			end)
 			vim.keymap.set("n", "<C-p>", builtin.git_files, {})
 			vim.keymap.set("n", "<leader>pws", function()
 				local word = vim.fn.expand("<cword>")
@@ -112,7 +126,6 @@ return {
 			vim.keymap.set("n", "<leader>ee", builtin.diagnostics, {})
 			vim.keymap.set("n", "<leader>gc", builtin.git_commits, {})
 			vim.keymap.set("n", "<leader>gfs", builtin.git_status, {})
-			vim.keymap.set("n", "<leader>ff", builtin.current_buffer_fuzzy_find, {})
 			vim.keymap.set("n", "<leader>pb", builtin.buffers, {})
 			vim.keymap.set("n", "<leader>gr", builtin.lsp_references, {})
 			vim.keymap.set("n", "<leader>gd", builtin.lsp_definitions, {})

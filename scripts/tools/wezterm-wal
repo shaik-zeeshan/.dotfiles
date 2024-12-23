@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# convert yml to toml
+wal_colors=$(cat ~/.cache/wal/colors.yml | yj -yt)
+
+# write to file
+echo "$wal_colors" >~/.config/wezterm/colors.toml

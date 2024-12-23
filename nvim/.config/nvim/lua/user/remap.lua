@@ -1,6 +1,9 @@
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
+vim.keymap.set("n", "<leader>h", "<cmd>cnext<CR>")
+vim.keymap.set("n", "<leader>;", "<cmd>cprev<CR>")
+
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "J", "mzJ`z")
@@ -43,10 +46,8 @@ vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww sessions<CR>")
 vim.keymap.set("n", "<C-x>", "<cmd>silent !tmux neww sessions --t<CR>")
 vim.keymap.set("n", "<C-_>", "<cmd>silent !tmux neww cht-sh<CR>")
 vim.keymap.set("n", "<leader>lg", "<cmd>silent !tmux neww lazygit<CR>")
-vim.keymap.set("n", "<leader>fs", "<cmd>silent !tmux neww yazi<CR>")
+vim.keymap.set("n", "<leader>yz", "<cmd>silent !tmux neww yazi<CR>")
 
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
@@ -54,9 +55,9 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>")
 
---vim.keymap.set("n", "<leader><leader>", function()
---	vim.cmd("so")
---end)
+-- vim.keymap.set("n", "<leader><leader>", function()
+-- 	vim.cmd("so")
+-- end)
 
 -- vim.keymap.set({ "n", "i" }, "<C-q>", "<cmd>silent !tmux splitw  ollama run codegemma<CR>")
 vim.keymap.set("n", "<leader>pwd", "<cmd>e `pwd`<CR>")
