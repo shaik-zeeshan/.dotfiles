@@ -41,7 +41,12 @@ local function create_floating_window(opts)
 	return { buf = buf, win = win }
 end
 
+function close_miniex()
+	MiniFiles.close()
+end
+
 local toggle_terminal = function()
+	close_miniex()
 	if not vim.api.nvim_win_is_valid(state.floating.win) then
 		state.floating = create_floating_window({ buf = state.floating.buf })
 		if vim.bo[state.floating.buf].buftype ~= "terminal" then

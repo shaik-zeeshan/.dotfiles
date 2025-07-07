@@ -7,11 +7,12 @@ scan_timeout = 10
 # Disable the blank line at the start of the prompt
 add_newline = false
 
+[fill]
+symbol = " "
 
 # Replace the '❯' symbol in the prompt with '➜'
 [character] # The name of the module we are configuring is 'character'
 success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
-
 
 [aws]
 symbol = "  "
@@ -153,6 +154,9 @@ Windows = "󰍲 "
 [package]
 symbol = "󰏗 "
 
+[bun]
+symbol = "🍔 "
+
 [perl]
 symbol = " "
 
@@ -185,3 +189,6 @@ symbol = " "
 
 [gradle]
 symbol = " "
+
+[gcloud]
+disabled = true

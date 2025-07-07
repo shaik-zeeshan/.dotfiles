@@ -1,4 +1,3 @@
-. "${HOME}/.cache/wal/colors.sh"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -75,7 +74,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
-    zsh-vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -157,12 +155,15 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # Python
 export PATH="$HOME/.local/bin:$PATH"
 
+# Pywal
+# /Users/shaikzeeshan/.local/lib/python3.12/site-packages
+export PATH="$HOME/.local/bin/python3.12/site-packages:$PATH"
+
 
 function zvm_after_init() {
   # Key bindings
   bindkey -s '^f' "sessions\n"
   bindkey -s '^x' "sessions --t\n"
-  bindkey -s '^t' "tmux-layout\n"
 }
 alias vim="nvim"
 
@@ -179,20 +180,15 @@ alias external="cd /Volumes/zeeshan"
 
 alias air='$(go env GOPATH)/bin/air'
 
-function copy() {
-    command=$1
-
-    eval $command | pbcopy
-}
+alias copy="pbcopy"
 
 function fzl(){
     eval ll | fzf
 }
 
-# ---- FZF -----
-
-# Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
+# ---- FZF -----
+# Set up fzf key bindings and fuzzy completion
 
 # --- setup fzf theme ---
 _gen_fzf_default_opts() {
@@ -237,6 +233,7 @@ export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 
+
 # Use fd (https://github.com/sharkdp/fd) for listing path candidates.
 # - The first argument to the function ($1) is the base path to start traversal
 # - See the source code (completion.{bash,zsh}) for the details.
@@ -270,6 +267,7 @@ alias lt="eza -T -I '.git|venv|data/zip2d/*|node_modules'"
 
 source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOMEBREW_PREFIX/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 if type brew &>/dev/null; then
    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
@@ -309,3 +307,30 @@ esac
 figlet -f graceful "shaik zeeshan"
 echo "Start Coding..."
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/shaikzeeshan/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/shaikzeeshan/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/shaikzeeshan/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/shaikzeeshan/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/shaikzeeshan/.lmstudio/bin"
+export TMUX_HIGHCOLOR="#FCF5D5"
+
+export PATH="$PATH:/Applications/screenpipe.app/Contents/MacOS"
+
+# lazygit alias
+alias lg="lazygit"
+export PATH="$HOME/.moon/bin:$PATH"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
+export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
+export ANDROID_HOME=/opt/homebrew/share/android-commandlinetools
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
+
+# proto
+export PROTO_HOME="$HOME/.proto";
+export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH";
+ZSH_THEME="powerlevel10k/powerlevel10k"

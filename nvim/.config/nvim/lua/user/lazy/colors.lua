@@ -2,52 +2,104 @@ function ColorMyPencils(color)
 	color = color or "kanagawa"
 	vim.cmd.colorscheme(color)
 
-	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-	vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
-	vim.cmd("highlight telescopeborder guibg=none")
-	vim.cmd("highlight telescopetitle guibg=none")
-	vim.cmd("highlight linenr guibg=none")
+	--	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+	--	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+	--	vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+	--	vim.cmd("highlight telescopeborder guibg=none")
+	--	vim.cmd("highlight telescopetitle guibg=none")
+	--	vim.cmd("highlight linenr guibg=none")
 end
 
 return {
-	-- {
-	--     "diegoulloao/neofusion.nvim",
-	--     priority = 1000,
-	--     config = function()
-	--         require("neofusion").setup({
-	--             palette = "material",
-	--             transparency = true,
-	--             styles = {
-	--                 comment = "italic",
-	--                 keyword = "italic",
-	--             },
-	--         })
-	--         ColorMyPencils("neofusion")
-	--     end
-	-- },
+	{
+		"xiyaowong/transparent.nvim",
+		lazy = false,
+		config = function()
+			require("transparent").setup({
+				-- table: default groups
+				groups = {
+					"Normal",
+					"NormalFloat",
+					"NormalNC",
+					"Comment",
+					"Constant",
+					"Special",
+					"Identifier",
+					"Statement",
+					"PreProc",
+					"Type",
+					"Underlined",
+					"Todo",
+					"Terminal",
+					"String",
+					"Function",
+					"Conditional",
+					"Repeat",
+					"Operator",
+					"Structure",
+					"LineNr",
+					"LineNrAbove",
+					"LineNrBelow",
+					"NonText",
+					"SignColumn",
+					"CursorLine",
+					"CursorLineNr",
+					"StatusLine",
+					"StatusLineNC",
+					"EndOfBuffer",
+					"MsgArea",
+				},
+				-- table: additional groups that should be cleared
+				extra_groups = {
+					"FloatBorder",
+					"Telescope",
+					"TelescopeBorder",
+					"TelescopeTitle",
+					"Lualine",
+				},
+				-- table: groups you don't want to clear
+				exclude_groups = {},
+				-- function: code to be executed after highlight groups are cleared
+				-- Also the user event "TransparentClear" will be triggered
+				on_clear = function() end,
+			})
+		end,
+	},
 	--	{
-	--		"folke/tokyonight.nvim",
-	--		name = "tokyonight",
+	--		"diegoulloao/neofusion.nvim",
+	--		priority = 1000,
 	--		config = function()
-	--			require("tokyonight").setup({
-	--				-- your configuration comes here
-	--				-- or leave it empty to use the default settings
-	--				style = "night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-	--				terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
+	--			require("neofusion").setup({
+	--				palette = "material",
 	--				styles = {
-	--					-- Style to be applied to different syntax groups
-	--					-- Value is any valid attr-list value for `:help nvim_set_hl`
-	--					comments = { italic = false },
-	--					keywords = { italic = false },
-	--					-- Background styles. Can be "dark", "transparent" or "normal"
-	--					sidebars = "transparent", -- style for sidebars, see below
-	--					floats = "transparent", -- style for floating windows
+	--					comment = "italic",
+	--					keyword = "italic",
 	--				},
 	--			})
-	--			ColorMyPencils("tokyonight")
 	--		end,
 	--	},
+	--{
+	--	"folke/tokyonight.nvim",
+	--	name = "tokyonight",
+	--	config = function()
+	--		require("tokyonight").setup({
+	--			-- your configuration comes here
+	--			-- or leave it empty to use the default settings
+	--			style = "night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+	--			terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
+	--			styles = {
+	--				-- Style to be applied to different syntax groups
+	--				-- Value is any valid attr-list value for `:help nvim_set_hl`
+	--				comments = { italic = false },
+	--				keywords = { italic = false },
+	--				-- Background styles. Can be "dark", "transparent" or "normal"
+	--				sidebars = "transparent", -- style for sidebars, see below
+	--				floats = "transparent", -- style for floating windows
+	--			},
+	--		})
+	--		ColorMyPencils("tokyonight")
+	--	end,
+	--},
 	--    {
 	--        "rose-pine/neovim",
 	--        name = "rose-pine",

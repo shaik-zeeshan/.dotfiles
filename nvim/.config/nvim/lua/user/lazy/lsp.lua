@@ -11,7 +11,6 @@ return {
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
 		"j-hui/fidget.nvim",
-		"jose-elias-alvarez/typescript.nvim",
 	},
 	config = function()
 		local cmp = require("cmp")
@@ -31,7 +30,7 @@ return {
 			ensure_installed = {
 				"lua_ls",
 				"rust_analyzer",
-				"tsserver",
+				"vtsls",
 			},
 			automatic_installation = true,
 			handlers = {
@@ -68,6 +67,14 @@ return {
 								hint = {
 									enable = true,
 								},
+								workspace = {
+									-- Make the server aware of Neovim runtime files
+									library = vim.api.nvim_get_runtime_file("", true),
+								},
+								-- Do not send telemetry data containing a randomized but unique identifier
+								telemetry = {
+									enable = false,
+								},
 							},
 						},
 					})
@@ -96,56 +103,125 @@ return {
 				"postcss.config.ts"
 			),
 		})
-		lspconfig.tsserver.setup({
+
+		lspconfig.vtsls.setup({
 			capabilities = capabilities,
 			root_dir = lspconfig.util.root_pattern("package.json"),
 			single_file_support = false,
+			complete_function_calls = true,
 			settings = {
 				typescript = {
+					updateImportsOnFileMove = { enabled = "always" },
+					suggest = {
+						completeFunctionCalls = true,
+					},
 					inlayHints = {
-						includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
-						includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-						includeInlayVariableTypeHints = true,
-						includeInlayFunctionParameterTypeHints = true,
-						includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-						includeInlayPropertyDeclarationTypeHints = true,
-						includeInlayFunctionLikeReturnTypeHints = true,
-						includeInlayEnumMemberValueHints = true,
+						enumMemberValues = { enabled = true },
+						functionLikeReturnTypes = { enabled = true },
+						parameterNames = { enabled = "literals" },
+						parameterTypes = { enabled = true },
+						propertyDeclarationTypes = { enabled = true },
+						variableTypes = { enabled = false },
 					},
 				},
-				javascript = {
-					inlayHints = {
-						includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
-						includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-						includeInlayVariableTypeHints = true,
-
-						includeInlayFunctionParameterTypeHints = true,
-						includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-						includeInlayPropertyDeclarationTypeHints = true,
-						includeInlayFunctionLikeReturnTypeHints = true,
-						includeInlayEnumMemberValueHints = true,
+				vtsls = {
+					enableMoveToFileCodeAction = true,
+					autoUseWorkspaceTsdk = true,
+					experimental = {
+						maxInlayHintLength = 30,
+						completion = {
+							enableServerSideFuzzyMatch = true,
+						},
+					},
+					tsserver = {
+						globalPlugins = {
+							{
+								name = "@mdx-js/typescript-plugin",
+								enableForWorkspaceTypeScriptVersions = true,
+								languages = {
+									"mdx",
+								},
+							},
+						},
 					},
 				},
 			},
-			inlayHints = {
-				enable = true,
+			filetypes = {
+				"javascript",
+				"javascriptreact",
+				"javascript.jsx",
+				"typescript",
+				"typescriptreact",
+				"typescript.tsx",
+				"markdown",
+				"mdx", -- <- Start TS server when you open a .mdx file
 			},
 		})
-		lspconfig.denols.setup({
-			root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
-		})
 
-		--lspconfig.eslint.setup({
-		--	settings = {
-		--		packageManager = "yarn",
+		--lspconfig.tsserver.setup({
+		--	globalPlugins = {
+		--		{
+		--			name = "@mdx-js/typescript-plugin",
+		--			enableForWorkspaceTypeScriptVersions = true,
+		--			languages = {
+		--				"mdx",
+		--			},
+		--		},
 		--	},
-		--	on_attach = function(client, bufnr)
-		--		vim.api.nvim_create_autocmd("BufWritePre", {
-		--			buffer = bufnr,
-		--			command = "EslintFixAll",
-		--		})
-		--	end,
+		--	settings = {
+		--		typescript = {
+		--			inlayHints = {
+		--				includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
+		--				includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+		--				includeInlayVariableTypeHints = true,
+		--				includeInlayFunctionParameterTypeHints = true,
+		--				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+		--				includeInlayPropertyDeclarationTypeHints = true,
+		--				includeInlayFunctionLikeReturnTypeHints = true,
+		--				includeInlayEnumMemberValueHints = true,
+		--			},
+		--		},
+		--		javascript = {
+		--			inlayHints = {
+		--				includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
+		--				includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+		--				includeInlayVariableTypeHints = true,
+
+		--				includeInlayFunctionParameterTypeHints = true,
+		--				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+		--				includeInlayPropertyDeclarationTypeHints = true,
+		--				includeInlayFunctionLikeReturnTypeHints = true,
+		--				includeInlayEnumMemberValueHints = true,
+		--			},
+		--		},
+		--	},
+		--	inlayHints = {
+		--		enable = true,
+		--	},
+		--	filetypes = {
+		--		"javascript",
+		--		"javascriptreact",
+		--		"javascript.jsx",
+		--		"typescript",
+		--		"typescriptreact",
+		--		"typescript.tsx",
+		--		"markdown",
+		--		"mdx", -- <- Start TS server when you open a .mdx file
+		--	},
 		--})
+
+		-- lspconfig.denols.setup({
+		-- 	root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+		-- 	capabilities = capabilities,
+		-- })
+
+		lspconfig.mdx_analyzer.setup({
+			typescript = {
+				enabled = true,
+			},
+			capabilities = capabilities,
+			filetypes = { "markdown", "mdx" },
+		})
 
 		local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
@@ -174,7 +250,7 @@ return {
 			float = {
 				focusable = false,
 				style = "minimal",
-				border = "rounded",
+				border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
 				source = "always",
 				header = "",
 				prefix = "",

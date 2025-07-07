@@ -99,29 +99,31 @@ return {
 				end
 			end
 
-			vim.keymap.set("n", "<leader>pf", function()
-				builtin.find_files({
-					find_command = { "fd", "--type", "f", "--hidden", "--follow" },
-				})
-			end, {})
-			vim.keymap.set("n", "<leader>en", function()
-				builtin.find_files({
-					cwd = vim.fn.stdpath("config"),
-				})
-			end)
-			vim.keymap.set("n", "<C-p>", builtin.git_files, {})
-			vim.keymap.set("n", "<leader>pws", function()
-				local word = vim.fn.expand("<cword>")
-				builtin.grep_string({ search = word })
-			end)
-			vim.keymap.set("n", "<leader>pWs", function()
-				local word = vim.fn.expand("<cWORD>")
-				builtin.grep_string({ search = word })
-			end)
-			vim.keymap.set("n", "<leader>ps", function()
-				builtin.grep_string({ search = vim.fn.input("Grep > ") })
-			end)
-			vim.keymap.set("n", "<leader>vh", builtin.help_tags, {})
+			--	vim.keymap.set("n", "<leader>pf", function()
+			--		require("mini.files").close()
+			--		builtin.find_files({
+			--			find_command = { "fd", "--type", "f", "--hidden", "--follow" },
+			--		})
+			--	end, {})
+
+			-- vim.keymap.set("n", "<leader>en", function()
+			-- 	builtin.find_files({
+			-- 		cwd = vim.fn.stdpath("config"),
+			-- 	})
+			-- end)
+			-- vim.keymap.set("n", "<C-p>", builtin.git_files, {})
+			-- vim.keymap.set("n", "<leader>pws", function()
+			-- 	local word = vim.fn.expand("<cword>")
+			-- 	builtin.grep_string({ search = word })
+			-- end)
+			-- vim.keymap.set("n", "<leader>pWs", function()
+			-- 	local word = vim.fn.expand("<cWORD>")
+			-- 	builtin.grep_string({ search = word })
+			-- end)
+			-- vim.keymap.set("n", "<leader>ps", function()
+			-- 	builtin.grep_string({ search = vim.fn.input("Grep > ") })
+			-- end)
+			-- vim.keymap.set("n", "<leader>vh", builtin.help_tags, {})
 
 			vim.keymap.set("n", "<leader>ee", builtin.diagnostics, {})
 			vim.keymap.set("n", "<leader>gc", builtin.git_commits, {})

@@ -11,12 +11,14 @@ return {
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load()
 			local ls = require("luasnip")
+
+			for _, ft_path in ipairs(vim.api.nvim_get_runtime_file("lua/user/snips/*.lua", true)) do
+				-- print("file", ft_path)
+				loadfile(ft_path)()
+			end
+
 			ls.filetype_extend("javascript", { "jsdoc" })
 			ls.filetype_extend("typescript", { "jsdoc" })
-			--- TODO: What is expand?
-			vim.keymap.set({ "i" }, "<C-s>e", function()
-				ls.expand()
-			end, { silent = true })
 
 			vim.keymap.set({ "i", "s" }, "<C-s>;", function()
 				ls.jump(1)

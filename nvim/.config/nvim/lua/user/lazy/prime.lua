@@ -1,43 +1,43 @@
 return {
-	{
-		"ThePrimeagen/harpoon",
-		branch = "harpoon2",
-		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
-		config = function()
-			local harpoon = require("harpoon")
+    {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+        config = function()
+            local harpoon = require("harpoon")
 
-			harpoon:setup()
+            harpoon:setup()
 
-			vim.keymap.set("n", "<leader>a", function()
-				harpoon:list():add()
-			end)
-			vim.keymap.set("n", "<C-e>", function()
-				harpoon.ui:toggle_quick_menu(harpoon:list())
-			end)
+            vim.keymap.set("n", "<leader>a", function()
+                harpoon:list():add()
+            end)
+            vim.keymap.set("n", "<C-e>", function()
+                harpoon.ui:toggle_quick_menu(harpoon:list())
+            end)
 
-			vim.keymap.set("n", "<C-h>", function()
-				harpoon:list():select(1)
-			end)
-			vim.keymap.set("n", "<C-t>", function()
-				harpoon:list():select(2)
-			end)
-			vim.keymap.set("n", "<C-n>", function()
-				harpoon:list():select(3)
-			end)
-			vim.keymap.set("n", "<C-s>", function()
-				harpoon:list():select(4)
-			end)
-		end,
-	},
-	{
-		"ThePrimeagen/vim-apm",
-		config = function()
-			--[[
+            vim.keymap.set("n", "<C-i>", function()
+                harpoon:list():select(1)
+            end)
+            vim.keymap.set("n", "<C-t>", function()
+                harpoon:list():select(2)
+            end)
+            vim.keymap.set("n", "<C-n>", function()
+                harpoon:list():select(3)
+            end)
+            vim.keymap.set("n", "<C-s>", function()
+                harpoon:list():select(4)
+            end)
+        end,
+    },
+    {
+        "ThePrimeagen/vim-apm",
+        config = function()
+            --[[
             local apm = require("vim-apm")
 
             apm:setup({})
             vim.keymap.set("n", "<leader>apm", function() apm:toggle_monitor() end)
             --]]
-		end,
-	},
+        end,
+    },
 }

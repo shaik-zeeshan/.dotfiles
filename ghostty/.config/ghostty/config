@@ -1,0 +1,33 @@
+# Background
+background-opacity = 0.90
+background-blur-radius = 40
+
+# Padding
+window-padding-x = 10
+window-padding-y = 10,0
+window-padding-balance = true
+
+# Font
+font-family = JetBrains Mono
+font-size = 14
+# adjust-cell-height = 5
+
+# Theme
+theme = GruvboxDarkHard
+
+# Macos
+macos-titlebar-style = hidden
+macos-icon = custom-style
+macos-icon-frame = plastic
+macos-icon-ghost-color = red
+macos-icon-screen-color = orange,black
+macos-window-shadow = false
+window-vsync = false
+
+# Browser
+link-url = true
+
+
+# Shell
+shell-integration = zsh
+
