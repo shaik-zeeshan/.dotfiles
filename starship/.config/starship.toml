@@ -1,194 +1,273 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
-
 # Wait 10 milliseconds for starship to check files under the current directory.
 scan_timeout = 10
-
 # Disable the blank line at the start of the prompt
 add_newline = false
+
+# Color palette from wallpaper
+palette = "wallpaper"
+
+[palettes.wallpaper]
+sage_light = "#A8B8A8"
+sage_mid = "#8B9A8B"
+sage_dark = "#6B7B6B"
+forest_green = "#4A5D4A"
+forest_dark = "#3A4D3A"
+slate_blue = "#707A8A"
+muted_blue = "#5C6E7A"
+warm_beige = "#B8AE9C"
+text_primary = "#8B9A8B"
+text_accent = "#7A8F7A"
 
 [fill]
 symbol = " "
 
-# Replace the '❯' symbol in the prompt with '➜'
-[character] # The name of the module we are configuring is 'character'
-success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
-
-[aws]
-symbol = "  "
-
-[buf]
-symbol = " "
-
-[c]
-symbol = " "
-
-[conda]
-symbol = " "
-
-[crystal]
-symbol = " "
-
-[dart]
-symbol = " "
+[character]
+success_symbol = '[➜](bold sage_light)'
+error_symbol = '[➜](bold red)'
 
 [directory]
+style = "bold sage_mid"
 read_only = " 󰌾"
+read_only_style = "forest_dark"
 truncation_length = 1
-style = "#D7A972"
-
-[docker_context]
-symbol = " "
-
-[elixir]
-symbol = " "
-
-[elm]
-symbol = " "
-
-[fennel]
-symbol = " "
-
-[fossil_branch]
-symbol = " "
+truncate_to_repo = false
 
 [git_branch]
-symbol = " "
+symbol = " "
+style = "forest_green"
+
+[git_status]
+style = "muted_blue"
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+staged = '[++\($count\)](sage_dark)'
 
 [git_commit]
-tag_symbol = '  '
+tag_symbol = '  '
+style = "slate_blue"
+
+[aws]
+symbol = "  "
+style = "muted_blue"
+
+[buf]
+symbol = " "
+style = "sage_mid"
+
+[c]
+symbol = " "
+style = "muted_blue"
+
+[conda]
+symbol = " "
+style = "forest_green"
+
+[crystal]
+symbol = " "
+style = "sage_light"
+
+[dart]
+symbol = " "
+style = "slate_blue"
+
+[docker_context]
+symbol = " "
+style = "muted_blue"
+
+[elixir]
+symbol = " "
+style = "forest_green"
+
+[elm]
+symbol = " "
+style = "sage_mid"
+
+[fennel]
+symbol = " "
+style = "sage_dark"
+
+[fossil_branch]
+symbol = " "
+style = "forest_green"
 
 [golang]
-symbol = " "
+symbol = " "
+style = "muted_blue"
 
 [guix_shell]
-symbol = " "
+symbol = " "
+style = "sage_mid"
 
 [haskell]
-symbol = " "
+symbol = " "
+style = "forest_dark"
 
 [haxe]
-symbol = " "
+symbol = " "
+style = "slate_blue"
 
 [hg_branch]
-symbol = " "
+symbol = " "
+style = "forest_green"
 
 [hostname]
-ssh_symbol = " "
+ssh_symbol = " "
+style = "sage_dark"
 
 [java]
-symbol = " "
+symbol = " "
+style = "muted_blue"
 
 [julia]
-symbol = " "
+symbol = " "
+style = "forest_green"
 
 [kotlin]
-symbol = " "
+symbol = " "
+style = "slate_blue"
 
 [lua]
-symbol = " "
+symbol = " "
+style = "sage_light"
 
 [memory_usage]
 symbol = "󰍛 "
+style = "forest_dark"
 
 [meson]
 symbol = "󰔷 "
+style = "sage_mid"
 
 [nim]
 symbol = "󰆥 "
+style = "muted_blue"
 
 [nix_shell]
-symbol = " "
+symbol = " "
+style = "sage_dark"
 
 [nodejs]
-symbol = " "
+symbol = " "
+style = "forest_green"
 
 [ocaml]
-symbol = " "
+symbol = " "
+style = "slate_blue"
 
 [os.symbols]
-Alpaquita = " "
-Alpine = " "
-AlmaLinux = " "
-Amazon = " "
-Android = " "
-Arch = " "
-Artix = " "
-CentOS = " "
-Debian = " "
-DragonFly = " "
-Emscripten = " "
-EndeavourOS = " "
-Fedora = " "
-FreeBSD = " "
+Alpaquita = " "
+Alpine = " "
+AlmaLinux = " "
+Amazon = " "
+Android = " "
+Arch = " "
+Artix = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
 Garuda = "󰛓 "
-Gentoo = " "
+Gentoo = " "
 HardenedBSD = "󰞌 "
 Illumos = "󰈸 "
-Kali = " "
-Linux = " "
-Mabox = " "
-Macos = " "
-Manjaro = " "
-Mariner = " "
-MidnightBSD = " "
-Mint = " "
-NetBSD = " "
-NixOS = " "
+Kali = " "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
 OpenBSD = "󰈺 "
-openSUSE = " "
+openSUSE = " "
 OracleLinux = "󰌷 "
-Pop = " "
-Raspbian = " "
-Redhat = " "
-RedHatEnterprise = " "
-RockyLinux = " "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+RockyLinux = " "
 Redox = "󰀘 "
 Solus = "󰠳 "
-SUSE = " "
-Ubuntu = " "
-Unknown = " "
-Void = " "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Void = " "
 Windows = "󰍲 "
+
+[os]
+style = "sage_mid"
 
 [package]
 symbol = "󰏗 "
+style = "forest_dark"
 
 [bun]
 symbol = "🍔 "
+style = "warm_beige"
 
 [perl]
-symbol = " "
+symbol = " "
+style = "slate_blue"
 
 [php]
-symbol = " "
+symbol = " "
+style = "muted_blue"
 
 [pijul_channel]
-symbol = " "
+symbol = " "
+style = "forest_green"
 
 [python]
-symbol = " "
+symbol = " "
+style = "sage_light"
 
 [rlang]
 symbol = "󰟔 "
+style = "muted_blue"
 
 [ruby]
-symbol = " "
+symbol = " "
+style = "forest_dark"
 
 [rust]
 symbol = "󱘗 "
+style = "sage_dark"
 
 [scala]
-symbol = " "
+symbol = " "
+style = "slate_blue"
 
 [swift]
-symbol = " "
+symbol = " "
+style = "sage_mid"
 
 [zig]
-symbol = " "
+symbol = " "
+style = "forest_green"
 
 [gradle]
-symbol = " "
+symbol = " "
+style = "muted_blue"
 
 [gcloud]
 disabled = true
+
+[username]
+style_user = "sage_mid"
+style_root = "forest_dark"
+
+[time]
+disabled = true
+style = "sage_dark"
+format = "[$time]($style) "
+
+[cmd_duration]
+style = "muted_blue"

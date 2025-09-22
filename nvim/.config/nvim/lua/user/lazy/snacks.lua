@@ -1,6 +1,6 @@
-function close_miniex()
-	MiniFiles.close()
-end
+-- function close_miniexs()
+-- 	MiniFiles.close()
+-- end
 
 return {
 	"folke/snacks.nvim",
@@ -13,7 +13,7 @@ return {
 		{
 			"<leader>pf",
 			function()
-				close_miniex()
+				-- close_miniexs()
 				Snacks.picker.smart()
 			end,
 			desc = "Buffers",
@@ -21,7 +21,7 @@ return {
 		{
 			"<leader>en",
 			function()
-				close_miniex()
+				-- close_miniexs()
 				Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
 			end,
 			desc = "Find Config File",
@@ -29,7 +29,6 @@ return {
 		{
 			"<leader>ff",
 			function()
-				close_miniex()
 				Snacks.picker.files()
 			end,
 			desc = "Find Files",
@@ -37,7 +36,7 @@ return {
 		{
 			"<leader>fg",
 			function()
-				close_miniex()
+				-- close_miniexs()
 				Snacks.picker.git_files()
 			end,
 			desc = "Find Git Files",
@@ -45,7 +44,7 @@ return {
 		{
 			"<leader>fp",
 			function()
-				close_miniex()
+				-- close_miniexs()
 				Snacks.picker.projects()
 			end,
 			desc = "Projects",
@@ -53,7 +52,7 @@ return {
 		{
 			"<leader>fr",
 			function()
-				close_miniex()
+				-- close_miniexs()
 				Snacks.picker.recent()
 			end,
 			desc = "Recent",
@@ -61,7 +60,7 @@ return {
 		{
 			"<leader>pws",
 			function()
-				close_miniex()
+				-- close_miniexs()
 				Snacks.picker.grep()
 			end,
 			desc = "Grep",
@@ -69,7 +68,7 @@ return {
 		{
 			"<leader>/",
 			function()
-				close_miniex()
+				-- close_miniexs()
 				Snacks.explorer()
 			end,
 			desc = "File Explorer",
@@ -77,7 +76,7 @@ return {
 		{
 			"<leader>vh",
 			function()
-				close_miniex()
+				-- close_miniexs()
 				Snacks.picker.help()
 			end,
 			desc = "Help Pages",
@@ -85,7 +84,7 @@ return {
 		{
 			"gd",
 			function()
-				close_miniex()
+				-- close_miniexs()
 				Snacks.picker.lsp_definitions()
 			end,
 			desc = "Goto Definition",
@@ -93,7 +92,7 @@ return {
 		{
 			"gD",
 			function()
-				close_miniex()
+				-- close_miniexs()
 				Snacks.picker.lsp_declarations()
 			end,
 			desc = "Goto Declaration",
@@ -101,7 +100,7 @@ return {
 		{
 			"gr",
 			function()
-				close_miniex()
+				-- close_miniexs()
 				Snacks.picker.lsp_references()
 			end,
 			nowait = true,
@@ -110,7 +109,7 @@ return {
 		{
 			"gI",
 			function()
-				close_miniex()
+				-- close_miniexs()
 				Snacks.picker.lsp_implementations()
 			end,
 			desc = "Goto Implementation",
@@ -118,7 +117,7 @@ return {
 		{
 			"gy",
 			function()
-				close_miniex()
+				-- close_miniexs()
 				Snacks.picker.lsp_type_definitions()
 			end,
 			desc = "Goto T[y]pe Definition",
@@ -126,7 +125,7 @@ return {
 		{
 			"<leader>ls",
 			function()
-				close_miniex()
+				-- close_miniexs()
 				Snacks.picker.lsp_symbols()
 			end,
 			desc = "LSP Symbols",
@@ -134,7 +133,7 @@ return {
 		{
 			"<leader>lws",
 			function()
-				close_miniex()
+				-- close_miniexs()
 				Snacks.picker.lsp_workspace_symbols()
 			end,
 			desc = "LSP Workspace Symbols",
@@ -142,15 +141,48 @@ return {
 		{
 			"<leader>lg",
 			function()
-				close_miniex()
+				-- close_miniexs()
 				Snacks.lazygit()
 			end,
 			desc = "LSP Workspace Symbols",
 		},
+		{
+			"<leader>ee",
+			function()
+				-- close_miniexs()
+				Snacks.picker.diagnostics()
+			end,
+			desc = "Diagnostics",
+		},
+		{
+			"<leader>gc",
+			function()
+				-- close_miniexs()
+				Snacks.picker.git_log()
+			end,
+			desc = "Git Log",
+		},
+		{
+			"<leader>gs",
+			function()
+				-- close_miniexs()
+				Snacks.picker.git_status()
+			end,
+			desc = "Git Status",
+		},
+		{
+			"gI",
+			function()
+				-- close_miniexs()
+				Snacks.picker.lsp_implementations()
+			end,
+			desc = "Goto Implementation",
+		},
+
 		-- {
 		-- 	"<leader>tt",
 		-- 	function()
-		-- 		close_miniex()
+		-- 		-- close_miniexs()
 		-- 		Snacks.terminal.toggle()
 		-- 	end,
 		-- 	desc = "LSP Workspace Symbols",

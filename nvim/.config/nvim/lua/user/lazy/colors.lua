@@ -2,18 +2,19 @@ function ColorMyPencils(color)
 	color = color or "kanagawa"
 	vim.cmd.colorscheme(color)
 
-	--	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-	--	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-	--	vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
-	--	vim.cmd("highlight telescopeborder guibg=none")
-	--	vim.cmd("highlight telescopetitle guibg=none")
-	--	vim.cmd("highlight linenr guibg=none")
+	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+	vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+	vim.cmd("highlight telescopeborder guibg=none")
+	vim.cmd("highlight telescopetitle guibg=none")
+	vim.cmd("highlight linenr guibg=none")
 end
 
 return {
 	{
 		"xiyaowong/transparent.nvim",
 		lazy = false,
+		priority = 1000,
 		config = function()
 			require("transparent").setup({
 				-- table: default groups
@@ -52,6 +53,7 @@ return {
 				-- table: additional groups that should be cleared
 				extra_groups = {
 					"FloatBorder",
+					"FloatShadow",
 					"Telescope",
 					"TelescopeBorder",
 					"TelescopeTitle",
@@ -122,16 +124,25 @@ return {
 	--			ColorMyPencils("gruvbox")
 	--		end,
 	--	},
+	-- {
+	-- 	"sainnhe/gruvbox-material",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		vim.cmd("colorscheme gruvbox-material")
+	-- 		vim.g.gruvbox_material_foreground = "mix"
+	-- 		vim.g.gruvbox_material_background = "hard"
+	-- 		vim.g.gruvbox_material_transparent_background = "2"
+	-- 		ColorMyPencils("gruvbox-material")
+	-- 	end,
+	-- },
 	{
-		"sainnhe/gruvbox-material",
+		"tinted-theming/tinted-nvim",
 		lazy = false,
 		priority = 1000,
 		config = function()
-			vim.cmd("colorscheme gruvbox-material")
-			vim.g.gruvbox_material_foreground = "mix"
-			vim.g.gruvbox_material_background = "hard"
-			vim.g.gruvbox_material_transparent_background = "2"
-			ColorMyPencils("gruvbox-material")
+			require("tinted-colorscheme").setup("base16-everforest-dark-soft")
+			-- ColorMyPencils("base16-0x96f")
 		end,
 	},
 	--	{

@@ -125,14 +125,14 @@ return {
 			-- end)
 			-- vim.keymap.set("n", "<leader>vh", builtin.help_tags, {})
 
-			vim.keymap.set("n", "<leader>ee", builtin.diagnostics, {})
-			vim.keymap.set("n", "<leader>gc", builtin.git_commits, {})
-			vim.keymap.set("n", "<leader>gfs", builtin.git_status, {})
-			vim.keymap.set("n", "<leader>pb", builtin.buffers, {})
-			vim.keymap.set("n", "<leader>gr", builtin.lsp_references, {})
-			vim.keymap.set("n", "<leader>gd", builtin.lsp_definitions, {})
-			vim.keymap.set("n", "<leader>gi", builtin.lsp_implementations, {})
-			vim.keymap.set("n", "<leader>lds", builtin.lsp_document_symbols, {})
+			-- vim.keymap.set("n", "<leader>ee", builtin.diagnostics, {})
+			-- vim.keymap.set("n", "<leader>gc", builtin.git_commits, {})
+			-- vim.keymap.set("n", "<leader>gfs", builtin.git_status, {})
+			-- vim.keymap.set("n", "<leader>pb", builtin.buffers, {})
+			--vim.keymap.set("n", "<leader>gr", builtin.lsp_references, {})
+			--vim.keymap.set("n", "<leader>gd", builtin.lsp_definitions, {})
+			-- vim.keymap.set("n", "<leader>gi", builtin.lsp_implementations, {})
+			-- vim.keymap.set("n", "<leader>lds", builtin.lsp_document_symbols, {})
 
 			require("telescope").load_extension("fzf")
 		end,

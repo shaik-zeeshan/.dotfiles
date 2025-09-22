@@ -49,9 +49,26 @@ return {
 					after = "fg",
 				},
 			})
-
-			vim.api.nvim_set_keymap("n", "<leader>td", "<cmd>TodoTelescope<cr>", { noremap = true, silent = true })
 		end,
+	},
+	{
+		"folke/todo-comments.nvim",
+		keys = {
+			{
+				"<leader>st",
+				function()
+					Snacks.picker.todo_comments()
+				end,
+				desc = "Todo",
+			},
+			{
+				"<leader>sT",
+				function()
+					Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } })
+				end,
+				desc = "Todo/Fix/Fixme",
+			},
+		},
 	},
 	{
 		"epwalsh/obsidian.nvim",

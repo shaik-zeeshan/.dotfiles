@@ -143,9 +143,6 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 # Tools
 export PATH="$HOME/tools:$PATH"
 
-# Go Binaries
-export PATH=${PATH}:`go env GOPATH`/bin
-
 # Tmuxifier
 export PATH="$HOME/.tmuxifier/bin:$PATH"
 
@@ -333,4 +330,7 @@ export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-
 # proto
 export PROTO_HOME="$HOME/.proto";
 export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH";
-ZSH_THEME="powerlevel10k/powerlevel10k"
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"
