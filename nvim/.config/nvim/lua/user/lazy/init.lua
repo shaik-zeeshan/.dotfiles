@@ -10,6 +10,39 @@ return {
 	"gpanders/editorconfig.nvim",
 	"ThePrimeagen/vim-be-good",
 	{
+		"folke/lazydev.nvim",
+		ft = "lua", -- only load on lua files
+		opts = {
+			library = {
+				-- See the configuration section for more details
+				-- Load luvit types when the `vim.uv` word is found
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+			},
+		},
+	},
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		---@module "ibl"
+		---@type ibl.config
+		opts = {},
+	},
+	{
+		"kevinhwang91/nvim-ufo",
+		dependencies = "kevinhwang91/promise-async",
+		config = function()
+			require("ufo").setup({
+				provider_selector = function(bufnr, filetype, buftype)
+					return { "lsp", "indent" }
+				end,
+			})
+
+			-- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+			vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+			vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+		end,
+	},
+	{
 		"folke/which-key.nvim",
 		config = function()
 			vim.o.timeout = true
@@ -32,6 +65,22 @@ return {
 	{
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
+		keys = {
+			{
+				"<leader>st",
+				function()
+					Snacks.picker.todo_comments()
+				end,
+				desc = "Todo",
+			},
+			{
+				"<leader>sT",
+				function()
+					Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } })
+				end,
+				desc = "Todo/Fix/Fixme",
+			},
+		},
 		config = function()
 			local todo = require("todo-comments")
 			todo.setup({
@@ -50,25 +99,6 @@ return {
 				},
 			})
 		end,
-	},
-	{
-		"folke/todo-comments.nvim",
-		keys = {
-			{
-				"<leader>st",
-				function()
-					Snacks.picker.todo_comments()
-				end,
-				desc = "Todo",
-			},
-			{
-				"<leader>sT",
-				function()
-					Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } })
-				end,
-				desc = "Todo/Fix/Fixme",
-			},
-		},
 	},
 	{
 		"epwalsh/obsidian.nvim",

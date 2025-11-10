@@ -22,8 +22,6 @@ return {
 			cmp_lsp.default_capabilities()
 		)
 
-		local lspconfig = require("lspconfig")
-
 		require("fidget").setup({})
 		require("mason").setup()
 		require("mason-lspconfig").setup({
@@ -34,15 +32,8 @@ return {
 			},
 			automatic_installation = true,
 			handlers = {
-				function(server_name) -- default handler (optional)
-					require("lspconfig")[server_name].setup({
-						capabilities = capabilities,
-					})
-				end,
-
 				["rust_analyzer"] = function()
-					lspconfig.rust_analyzer.setup({
-						enable = false,
+					vim.lsp.config("rust_analyzer", {
 						capabilities = capabilities,
 						settings = {
 							["rust-analyzer"] = {
@@ -55,35 +46,30 @@ return {
 							},
 						},
 					})
+					vim.lsp.enable("rust_analyzer")
 				end,
 
 				["lua_ls"] = function()
-					lspconfig.lua_ls.setup({
+					vim.lsp.config("lua_ls", {
 						capabilities = capabilities,
 						settings = {
 							Lua = {
+								runtime = {
+									version = "LuaJIT",
+								},
 								diagnostics = {
 									globals = { "vim", "it", "describe", "before_each", "after_each" },
-								},
-								hint = {
-									enable = true,
-								},
-								workspace = {
-									-- Make the server aware of Neovim runtime files
-									library = vim.api.nvim_get_runtime_file("", true),
-								},
-								-- Do not send telemetry data containing a randomized but unique identifier
-								telemetry = {
-									enable = false,
 								},
 							},
 						},
 					})
+
+					vim.lsp.enable("lua_ls")
 				end,
 			},
 		})
 
-		lspconfig.tailwindcss.setup({
+		vim.lsp.config("tailwindcss", {
 			capabilities = capabilities,
 			settings = {
 				tailwindCSS = {
@@ -95,24 +81,28 @@ return {
 					},
 				},
 			},
-			root_dir = lspconfig.util.root_pattern(
+			root_markers = {
 				"tailwind.config.js",
 				"tailwind.config.cjs",
 				"tailwind.config.ts",
 				"postcss.config.js",
 				"postcss.config.cjs",
-				"postcss.config.ts"
-			),
+				"postcss.config.ts",
+			},
 		})
+		vim.lsp.enable("tailwindcss")
 
-		lspconfig.vtsls.setup({
+		vim.lsp.config("vtsls", {
 			capabilities = capabilities,
-			root_dir = lspconfig.util.root_pattern("package.json"),
+			root_markers = { "package.json" },
 			single_file_support = false,
 			complete_function_calls = true,
 			settings = {
 				typescript = {
 					updateImportsOnFileMove = { enabled = "always" },
+					preferences = {
+						importModuleSpecifier = "non-relative",
+					},
 					suggest = {
 						completeFunctionCalls = true,
 					},
@@ -154,75 +144,25 @@ return {
 				"typescript",
 				"typescriptreact",
 				"typescript.tsx",
-				"markdown",
-				"mdx", -- <- Start TS server when you open a .mdx file
+				-- "markdown",
+				-- "mdx", -- <- Start TS server when you open a .mdx file
 			},
 		})
 
-		--lspconfig.tsserver.setup({
-		--	globalPlugins = {
-		--		{
-		--			name = "@mdx-js/typescript-plugin",
-		--			enableForWorkspaceTypeScriptVersions = true,
-		--			languages = {
-		--				"mdx",
-		--			},
-		--		},
-		--	},
-		--	settings = {
-		--		typescript = {
-		--			inlayHints = {
-		--				includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
-		--				includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-		--				includeInlayVariableTypeHints = true,
-		--				includeInlayFunctionParameterTypeHints = true,
-		--				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-		--				includeInlayPropertyDeclarationTypeHints = true,
-		--				includeInlayFunctionLikeReturnTypeHints = true,
-		--				includeInlayEnumMemberValueHints = true,
-		--			},
-		--		},
-		--		javascript = {
-		--			inlayHints = {
-		--				includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
-		--				includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-		--				includeInlayVariableTypeHints = true,
-
-		--				includeInlayFunctionParameterTypeHints = true,
-		--				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-		--				includeInlayPropertyDeclarationTypeHints = true,
-		--				includeInlayFunctionLikeReturnTypeHints = true,
-		--				includeInlayEnumMemberValueHints = true,
-		--			},
-		--		},
-		--	},
-		--	inlayHints = {
-		--		enable = true,
-		--	},
-		--	filetypes = {
-		--		"javascript",
-		--		"javascriptreact",
-		--		"javascript.jsx",
-		--		"typescript",
-		--		"typescriptreact",
-		--		"typescript.tsx",
-		--		"markdown",
-		--		"mdx", -- <- Start TS server when you open a .mdx file
-		--	},
-		--})
-
+		vim.lsp.enable("vtsls")
 		-- lspconfig.denols.setup({
 		-- 	root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
 		-- 	capabilities = capabilities,
 		-- })
 
-		lspconfig.mdx_analyzer.setup({
+		vim.lsp.config("mdx_analzyer", {
 			typescript = {
 				enabled = true,
 			},
 			capabilities = capabilities,
 			filetypes = { "markdown", "mdx" },
 		})
+		vim.lsp.enable("mdx_analzyer")
 
 		local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
@@ -246,16 +186,39 @@ return {
 			}),
 		})
 
+		-- vim.diagnostic.config({
+		-- 	-- update_in_insert = true,
+		-- 	virtual_text = true,
+		-- 	virtual_line = true,
+		-- 	float = {
+		-- 		focusable = false,
+		-- 		style = "minimal",
+		-- 		source = "always",
+		-- 		header = "",
+		-- 		prefix = "",
+		-- 	},
+		-- })
 		vim.diagnostic.config({
-			-- update_in_insert = true,
+			-- virtual_lines = true,
 			virtual_text = true,
+			underline = true,
+			update_in_insert = false,
+			severity_sort = true,
 			float = {
-				focusable = false,
-				style = "minimal",
-				border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-				source = "always",
-				header = "",
-				prefix = "",
+				border = "rounded",
+				source = true,
+			},
+			signs = {
+				text = {
+					[vim.diagnostic.severity.ERROR] = "󰅚 ",
+					[vim.diagnostic.severity.WARN] = "󰀪 ",
+					[vim.diagnostic.severity.INFO] = "󰋽 ",
+					[vim.diagnostic.severity.HINT] = "󰌶 ",
+				},
+				numhl = {
+					[vim.diagnostic.severity.ERROR] = "ErrorMsg",
+					[vim.diagnostic.severity.WARN] = "WarningMsg",
+				},
 			},
 		})
 	end,

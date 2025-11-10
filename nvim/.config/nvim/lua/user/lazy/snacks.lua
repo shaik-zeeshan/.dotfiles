@@ -178,6 +178,13 @@ return {
 			end,
 			desc = "Goto Implementation",
 		},
+		{
+			"<leader>nH",
+			function()
+				Snacks.picker.highlights()
+			end,
+			desc = "Highlights",
+		},
 
 		-- {
 		-- 	"<leader>tt",

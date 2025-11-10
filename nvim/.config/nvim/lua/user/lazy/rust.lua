@@ -1,26 +1,26 @@
 return {
-	{
-		"simrat39/rust-tools.nvim",
-		config = function()
-			local rt = require("rust-tools")
-			rt.setup({
-				server = {
-					on_attach = function(client, bufnr)
-						if client.supports_method("textDocument/formatting") then
-							vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-							vim.api.nvim_create_autocmd("BufWritePre", {
-								group = augroup,
-								buffer = bufnr,
-								callback = function()
-									vim.lsp.buf.format({ bufnr = bufnr })
-								end,
-							})
-						end
-					end,
-				},
-			})
-		end,
-	},
+	-- {
+	-- 	"simrat39/rust-tools.nvim",
+	-- 	config = function()
+	-- 		local rt = require("rust-tools")
+	-- 		rt.setup({
+	-- 			server = {
+	-- 				on_attach = function(client, bufnr)
+	-- 					if client.supports_method("textDocument/formatting") then
+	-- 						vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+	-- 						vim.api.nvim_create_autocmd("BufWritePre", {
+	-- 							group = augroup,
+	-- 							buffer = bufnr,
+	-- 							callback = function()
+	-- 								vim.lsp.buf.format({ bufnr = bufnr })
+	-- 							end,
+	-- 						})
+	-- 					end
+	-- 				end,
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 	-- {
 	--   'mrcjkb/rustaceanvim',
 	--   version = '^6', -- Recommended

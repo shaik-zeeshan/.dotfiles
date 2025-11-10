@@ -58,6 +58,11 @@ return {
 					"TelescopeBorder",
 					"TelescopeTitle",
 					"Lualine",
+					"Tabline",
+					"TablineSel",
+					"TablineFill",
+					"CursorLineFold",
+					"FoldColumn",
 				},
 				-- table: groups you don't want to clear
 				exclude_groups = {},
@@ -142,6 +147,12 @@ return {
 		priority = 1000,
 		config = function()
 			require("tinted-colorscheme").setup("base16-everforest-dark-soft")
+			local tinted = require("tinted-colorscheme")
+			tinted.setup("base16-da-one-black", {
+				supports = {
+					live_reload = true,
+				},
+			})
 			-- ColorMyPencils("base16-0x96f")
 		end,
 	},
