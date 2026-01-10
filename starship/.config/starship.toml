@@ -13,171 +13,144 @@ $C1\
 $line_break\
 $character"""
 
-# Color palette using environment variables
-palette = "dynamic"
 
-[palettes.dynamic]
-c1 = "#FFB366"  # Bright warm orange - good for text
-c2 = "#FF8F65"  # Medium orange - readable
-c3 = "#FF6B4A"  # Coral red - bright enough for text
-c4 = "#E85A4F"  # Deep red - good contrast
-c5 = "#2D3748"  # Dark blue-gray - good for backgrounds/borders
-c6 = "#4A5568"  # Medium gray - readable
-c7 = "#718096"  # Light gray - good for secondary text
-c8 = "#A0AEC0"  # Lighter gray - subtle but visible
-c9 = "#CBD5E0"  # Very light gray - high contrast
-c10 = "#F7FAFC" # Near white - maximum contrast
-
-
-# Environment variable modules for color theme info
-# [env_var.THEME_NAME]
-# variable = "CURRENT_THEME"
-# default = "sunset-mountain"
-# style = "c3"
-#format = "[$env_value](italic $style)"
-
-# [env_var.COLOR_MODE]
-# variable = "COLOR_MODE"
-# default = "auto"
-# style = "c7"
-#format = "[$env_value]($style)"
 
 [fill]
 symbol = " "
 
 [character]
-success_symbol = "[➜](bold c1)"
+success_symbol = "[➜](bold green)"
 error_symbol = "[➜](bold red)"
 
 [directory]
-style = "bold c2"
+style = "bold blue"
 read_only = " 󰌾"
-read_only_style = "c5"
+read_only_style = "red"
 truncation_length = 1
 truncate_to_repo = false
 
 [git_branch]
 symbol = " "
-style = "c4"
+style = "purple"
 
 [git_status]
-style = "c6"
+style = "yellow"
 ahead = "⇡${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
 behind = "⇣${count}"
-staged = "[++\\($count\\)](c7)"
+staged = "[++\\($count\\)](green)"
 
 [git_commit]
 tag_symbol = "  "
-style = "c8"
+style = "cyan"
 
 [aws]
 symbol = "  "
-style = "c6"
+style = "yellow"
 
 [buf]
 symbol = " "
-style = "c2"
+style = "cyan"
 
 [c]
 symbol = " "
-style = "c6"
+style = "blue"
 
 [conda]
 symbol = " "
-style = "c4"
+style = "green"
 
 [crystal]
 symbol = " "
-style = "c1"
+style = "white"
 
 [dart]
 symbol = " "
-style = "c8"
+style = "blue"
 
 [docker_context]
 symbol = " "
-style = "c6"
+style = "blue"
 
 [elixir]
 symbol = " "
-style = "c4"
+style = "purple"
 
 [elm]
 symbol = " "
-style = "c2"
+style = "cyan"
 
 [fennel]
 symbol = " "
-style = "c7"
+style = "green"
 
 [fossil_branch]
 symbol = " "
-style = "c4"
+style = "purple"
 
 [golang]
 symbol = " "
-style = "c6"
+style = "blue"
 
 [guix_shell]
 symbol = " "
-style = "c2"
+style = "cyan"
 
 [haskell]
 symbol = " "
-style = "c5"
+style = "purple"
 
 [haxe]
 symbol = " "
-style = "c8"
+style = "blue"
 
 [hg_branch]
 symbol = " "
-style = "c4"
+style = "purple"
 
 [hostname]
 ssh_symbol = " "
-style = "c7"
+style = "green"
 
 [java]
 symbol = " "
-style = "c6"
+style = "red"
 
 [julia]
 symbol = " "
-style = "c4"
+style = "purple"
 
 [kotlin]
 symbol = " "
-style = "c8"
+style = "blue"
 
 [lua]
 symbol = " "
-style = "c1"
+style = "blue"
 
 [memory_usage]
 symbol = "󰍛 "
-style = "c5"
+style = "dimmed white"
 
 [meson]
 symbol = "󰔷 "
-style = "c2"
+style = "blue"
 
 [nim]
 symbol = "󰆥 "
-style = "c6"
+style = "yellow"
 
 [nix_shell]
 symbol = " "
-style = "c7"
+style = "blue"
 
 [nodejs]
 symbol = " "
-style = "c4"
+style = "green"
 
 [ocaml]
 symbol = " "
-style = "c8"
+style = "yellow"
 
 [os.symbols]
 Alpaquita = " "
@@ -225,71 +198,71 @@ Void = " "
 Windows = "󰍲 "
 
 [os]
-style = "c2"
+style = "cyan"
 
 [package]
 symbol = "󰏗 "
-style = "c5"
+style = "purple"
 
 [bun]
 symbol = "🍔 "
-style = "c3"
+style = "bold"
 
 [perl]
 symbol = " "
-style = "c8"
+style = "blue"
 
 [php]
 symbol = " "
-style = "c6"
+style = "purple"
 
 [pijul_channel]
 symbol = " "
-style = "c4"
+style = "cyan"
 
 [python]
 symbol = " "
-style = "c1"
+style = "yellow"
 
 [rlang]
 symbol = "󰟔 "
-style = "c6"
+style = "blue"
 
 [ruby]
 symbol = " "
-style = "c5"
+style = "red"
 
 [rust]
 symbol = "󱘗 "
-style = "c7"
+style = "red"
 
 [scala]
 symbol = " "
-style = "c8"
+style = "red"
 
 [swift]
 symbol = " "
-style = "c2"
+style = "cyan"
 
 [zig]
 symbol = " "
-style = "c4"
+style = "yellow"
 
 [gradle]
 symbol = " "
-style = "c6"
+style = "cyan"
 
 [gcloud]
 disabled = true
 
 [username]
-style_user = "c2"
-style_root = "c5"
+style_user = "cyan"
+style_root = "red"
 
 [time]
 disabled = true
-style = "c7"
+style = "yellow"
 format = "[$time]($style) "
 
 [cmd_duration]
-style = "c6"
+style = "yellow"

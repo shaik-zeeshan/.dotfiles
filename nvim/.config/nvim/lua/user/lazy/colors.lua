@@ -146,13 +146,23 @@ return {
 		lazy = false,
 		priority = 1000,
 		config = function()
-			require("tinted-colorscheme").setup("base16-everforest-dark-soft")
 			local tinted = require("tinted-colorscheme")
-			tinted.setup("base16-da-one-black", {
-				supports = {
-					live_reload = true,
-				},
-			})
+			vim.cmd([[colorscheme tinted-nvim-colors-file]])
+			-- tinted.setup(nil, {
+			-- 	supports = {
+			-- 		live_reload = true,
+			-- 	},
+			-- })
+			-- tinted.setup("base16-kanagawa-dragon", {
+			-- 	supports = {
+			-- 		live_reload = true,
+			-- 	},
+			-- })
+			-- tinted.setup("base16-grayscale-dark", {
+			-- 	supports = {
+			-- 		live_reload = true,
+			-- 	},
+			-- })
 			-- ColorMyPencils("base16-0x96f")
 		end,
 	},

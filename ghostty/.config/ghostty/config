@@ -14,14 +14,14 @@ font-size = 14
 adjust-cell-height = 2
 
 # Theme
-theme = 0x96f
+# theme = 0x96f
+
+# Set `theme` to "tinted-theming":
+theme = "tinted-theming"
 
 # Macos
 macos-titlebar-style = hidden
 macos-icon = custom-style
-macos-icon-frame = plastic
-macos-icon-ghost-color = red
-macos-icon-screen-color = red,black
 
 macos-window-shadow = false
 
@@ -32,5 +32,6 @@ keybind = global:cmd+shift+alt+ctrl+n=toggle_quick_terminal
 # Browser
 link-url = true
 
-command = env XDG_CONFIG_HOME="/Users/shaikzeeshan/.config" PATH="/opt/homebrew/bin:/Users/shaikzeeshan/tools:/usr/local/bin:$PATH" EDITOR="nvim" /opt/homebrew/bin/nu -l
+# command = env XDG_CONFIG_HOME="/Users/shaikzeeshan/.config" PATH="/opt/homebrew/bin:/Users/shaikzeeshan/tools:/usr/local/bin:$PATH" EDITOR="nvim" /opt/homebrew/bin/nu -l
 
+keybind = shift+enter=text:\x1b\r
