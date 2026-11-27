@@ -1,59 +1,42 @@
+# CachyOS defaults (fastfetch greeting, handy aliases)
+test -f /usr/share/cachyos-fish-config/cachyos-config.fish; and source /usr/share/cachyos-fish-config/cachyos-config.fish
 
-fish_add_path ~/.cargo/bin
-fish_add_path ~/tools
+fish_add_path ~/.local/bin ~/.cargo/bin ~/tools
+
+set -gx EDITOR nvim
+set -gx VISUAL nvim
+
 alias vim="nvim"
-
 alias ll="ls -a"
-
-# TMUX
-alias t="tmux"
-alias ta="tmux attach -t"
-alias tl="tmux ls"
-alias tk="tmux kill-session -t"
-alias tka="tmux kill-session -a"
 alias cd="z"
 alias lg="lazygit"
 
-
-set -gx TINTED_TMUX_OPTION_ACTIVE 1
-
-set -gx SSH_AUTH_SOCK "/Users/shaikzeeshan/.bitwarden-ssh-agent.sock"
+# 1Password SSH agent
+set -gx SSH_AUTH_SOCK "$HOME/.1password/agent.sock"
 
 set -g fish_key_bindings fish_vi_key_bindings
 
 if status is-interactive
-    # Commands to run in interactive sessions can go here
-  atuin init fish | source
+    atuin init fish | source
 
-  if status --is-interactive
-  set BASE16_SHELL_PATH "$HOME/.local/share/tinted-theming/tinty/repos/tinted-shell"
+    set BASE16_SHELL_PATH "$HOME/.local/share/tinted-theming/tinty/repos/tinted-shell"
     if test -s "$BASE16_SHELL_PATH"
-      source "$BASE16_SHELL_PATH/profile_helper.fish"
+        source "$BASE16_SHELL_PATH/profile_helper.fish"
     end
-  end
+
+    starship init fish | source
+    zoxide init fish | source
+    mise activate fish | source
 end
-
-
-starship init fish | source
-zoxide init fish | source
-~/.local/bin/mise activate fish | source
-
 
 function fish_user_key_bindings
-  bind -M default ctrl-x 'sessions --t'
-  bind -M default ctrl-t 'sessions'
-  bind -M insert ctrl-x 'sessions --t'
-  bind -M insert ctrl-t 'sessions'
-  bind -M visual y fish_clipboard_copy
-  bind -M normal yy fish_clipboard_copy
-  bind p fish_clipboard_paste
+    bind -M visual y fish_clipboard_copy
+    bind -M default yy fish_clipboard_copy
+    bind -M default p fish_clipboard_paste
 end
-
-
 
 # pnpm
-set -gx PNPM_HOME "/Users/shaikzeeshan/Library/pnpm"
+set -gx PNPM_HOME "$HOME/.local/share/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
+    set -gx PATH "$PNPM_HOME" $PATH
 end
-# pnpm end

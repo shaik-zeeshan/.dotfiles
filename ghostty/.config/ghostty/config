@@ -9,7 +9,7 @@ window-padding-balance = true
 
 # Font
 # font-family = ZedMono NFM
-font-family = ZedMono
+font-family = ZedMono Nerd Font Mono
 font-size = 14
 adjust-cell-height = 2
 
@@ -19,19 +19,15 @@ adjust-cell-height = 2
 # Set `theme` to "tinted-theming":
 theme = "tinted-theming"
 
-# Macos
-macos-titlebar-style = hidden
-macos-icon = custom-style
-
-macos-window-shadow = false
-
 window-vsync = true
 
-keybind = global:cmd+shift+alt+ctrl+n=toggle_quick_terminal
 
 # Browser
 link-url = true
 
-# command = env XDG_CONFIG_HOME="/Users/shaikzeeshan/.config" PATH="/opt/homebrew/bin:/Users/shaikzeeshan/tools:/usr/local/bin:$PATH" EDITOR="nvim" /opt/homebrew/bin/nu -l
 
 keybind = shift+enter=text:\x1b\r
+
+# Linux
+gtk-titlebar = false
+window-decoration = none
